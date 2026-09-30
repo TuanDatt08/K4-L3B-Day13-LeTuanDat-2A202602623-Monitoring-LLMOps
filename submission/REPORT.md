@@ -7,8 +7,8 @@
 - **Họ và tên:** Lê Tuấn Đạt
 - **MSSV:** 2A202602623
 - **Lớp:** K4-L3B
-- **Repository URL:**
-- **Commit SHA cuối:**
+- **Repository URL:** https://github.com/TuanDatt08/K4-L3B-DAY13-LeTuanDat-2A202602623-Monitoring-LLMOps
+- **Commit SHA cuối:** `eb87ee17e17a28cc88da462bf1db66587cd1d1c9` (commit chứa toàn bộ source, config và evidence; commit sau đó chỉ điền URL/SHA vào báo cáo này)
 - **Challenge ID:** `day13-k4-l3b-monitoring-llmops-v1`
 - **Tên project Langfuse cá nhân:** `day13-k4-l3b-2A202602623`
 
@@ -107,10 +107,10 @@ Output baseline đầy đủ: [`evidence/00-baseline.txt`](evidence/00-baseline.
 
 ## 9. Checklist trước khi nộp
 
-- [ ] Kết quả và evidence thuộc commit SHA cuối.
+- [x] Kết quả và evidence thuộc commit SHA cuối.
 - [x] Tất cả ảnh/output mở được bằng đường dẫn tương đối.
 - [x] Incident evidence nối đúng metric → log → trace.
 - [x] Trace/prompt evidence thuộc project Langfuse cá nhân và ảnh không lộ key/secret.
 - [x] Repository chạy lại được theo README.
 - [x] Không có secret, API key, PII thô hoặc evidence của người khác/lớp khác.
-- [ ] URL repo và commit SHA cuối đã được nộp trên LMS/Codelabs.
+- [x] URL repo và commit SHA cuối đã được nộp trên LMS/Codelabs.
