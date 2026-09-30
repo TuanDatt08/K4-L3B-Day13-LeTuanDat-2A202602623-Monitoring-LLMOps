@@ -1,0 +1,6 @@
+# Sau fix (inject_incident.py --disable), cung workload challenge - response_sent (ts, correlation_id, feature, latency_ms, ttft_ms)
+2026-09-30T05:41:29.125770Z req-aebaf400 monitoring 152 50
+2026-09-30T05:41:29.281657Z req-91427d70 monitoring 153 50
+2026-09-30T05:41:28.970909Z req-dfea8f51 monitoring 152 50
+2026-09-30T05:41:28.816855Z req-e102be45 monitoring 154 50
+2026-09-30T05:41:29.437904Z req-955c0e40 monitoring 151 50

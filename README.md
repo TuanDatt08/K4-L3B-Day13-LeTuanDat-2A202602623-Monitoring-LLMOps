@@ -145,6 +145,13 @@ python -m pytest -q
 
 Baseline log chưa đạt là bình thường vì các `TODO` của CP1 chưa được làm. Ghi lại kết quả baseline vào `submission/REPORT.md` trước khi sửa.
 
+Dựng dashboard 6 panel từ `data/logs.jsonl` (sau khi đã có log):
+
+```bash
+python scripts/build_dashboard.py          # ghi data/dashboard.html, mở bằng trình duyệt
+python scripts/build_dashboard.py --watch  # build lại mỗi 30 giây
+```
+
 ## Lộ trình 9:00–13:00 (240 phút)
 
 | Mốc | Thời gian | Việc chính | Hoàn thành khi |

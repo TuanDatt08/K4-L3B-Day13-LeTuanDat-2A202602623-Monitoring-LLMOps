@@ -3,8 +3,10 @@ from __future__ import annotations
 import random
 import time
 from dataclasses import dataclass
+from datetime import datetime, timezone
 
 from .incidents import STATE
+from .tracing import get_langfuse_client, observe
 
 
 @dataclass
@@ -25,10 +27,12 @@ class FakeLLM:
     def __init__(self, model: str = "claude-sonnet-4-5") -> None:
         self.model = model
 
+    @observe(name="llm-generation", as_type="generation", capture_input=False, capture_output=False)
     def generate(self, prompt: str) -> FakeResponse:
         started = time.perf_counter()
         time.sleep(0.05)  # mô phỏng thời điểm token đầu tiên sẵn sàng
         ttft_ms = int((time.perf_counter() - started) * 1000)
+        first_token_at = datetime.now(timezone.utc)
         time.sleep(0.10)
         input_tokens = max(20, len(prompt) // 4)
         output_tokens = random.randint(80, 180)
@@ -37,6 +41,15 @@ class FakeLLM:
         answer = (
             "Starter answer. You should improve this output logic and add better quality checks. "
             "Use retrieved context and keep responses concise."
+        )
+        # Giá giống LabAgent._estimate_cost: $3/1M input, $15/1M output.
+        # Không gửi raw prompt/answer lên trace vì có thể chứa PII.
+        get_langfuse_client().update_current_generation(
+            model=self.model,
+            completion_start_time=first_token_at,
+            usage_details={"input": input_tokens, "output": output_tokens},
+            cost_details={"input": input_tokens * 3 / 1_000_000, "output": output_tokens * 15 / 1_000_000},
+            metadata={"ttft_ms": ttft_ms},
         )
         return FakeResponse(
             text=answer,

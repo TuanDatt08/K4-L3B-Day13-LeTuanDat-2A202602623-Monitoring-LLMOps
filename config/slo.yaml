@@ -7,7 +7,13 @@ primary_slo:
     total_event: 'event == "request_received"'
   target_percent: 99.5
   error_budget_percent: 0.5
-  note: Học viên phải giải thích hoặc điều chỉnh ngưỡng bằng baseline của mình. Ví dụ nếu có 10,000 request trong cửa sổ 28 ngày, error budget 0.5% nghĩa là tối đa 50 request được phép không đạt SLO.
+  note: >-
+    Giữ ngưỡng 3000ms vì baseline P50 ~390ms, TTFT P95 ~50ms; chỉ request cold start
+    (lần đầu fetch prompt/khởi tạo Langfuse) và incident rag_slow (+2.5s) mới tiến gần ngưỡng.
+    Request lỗi (request_failed) không có response_sent nên tự động tính là bad event.
+    Error budget 0.5%: 10,000 request/28 ngày -> tối đa 50 request lỗi hoặc > 3000ms.
+    Workload lab 10 request/lượt nên chỉ 1 request xấu đã là 10% -> đốt budget rất nhanh,
+    vì vậy alert dùng duration 5m thay vì cảnh báo theo từng request.
 guardrails:
   error_rate_pct_max: 2
   daily_cost_usd_max: 2.5
